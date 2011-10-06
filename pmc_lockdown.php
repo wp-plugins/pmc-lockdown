@@ -3,7 +3,7 @@
 Plugin Name: PMC Lockdown
 Plugin URI: http://engineering.pmc.com/
 Description: Ability to enter lockdown mode: force-logout all non-administrators, prevent logins from non-administrators, and disable commenting.
-Version: 0.9.3
+Version: 0.9.4
 Author: PMC
 Author URI: http://engineering.pmc.com/
 */
@@ -95,11 +95,11 @@ add_filter( 'authenticate', 'pmc_lockdown_authentication', 99, 2 );
  * lockdown mode.
  *
  * @since 0.9.0 2011-08-13 Gabriel Koen
- * @version 0.9.1 2011-08-16 Gabriel Koen
+ * @version 0.9.4 2011-10-06 Gabriel Koen
  */
 function pmc_lockdown_force_logout( $cookie_elements, $user ) {
 	// If we're not in lockdown mode, bail.
-	if ( !defined('PMC_LOCKDOWN') || !is_admin() ) {
+	if ( !defined('PMC_LOCKDOWN') || defined('PMC_LOCKDOWN') && !is_admin() ) {
 		return;
 	}
 
@@ -169,11 +169,11 @@ function pmc_lockdown_get_role( $not_a_wp_user_object = '', $username = '' ) {
 	$roles = $current_user->roles;
 
 	// We should have the user's roles in $user_data now, but sanity check anyway.
-        if ( isset($roles) && is_array($roles) ) {
-                $user_role = array_shift($roles);
-        } else {
-                $user_role = '';
-        }
+	if ( isset($roles) && is_array($roles) ) {
+		$user_role = array_shift($roles);
+	} else {
+		$user_role = '';
+	}
 
 	return $user_role;
 }
