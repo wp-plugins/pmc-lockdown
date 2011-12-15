@@ -3,7 +3,7 @@ Contributors: pmcdotcom, mintindeed, IAmWilliamWallace
 Tags: maintenance
 Requires at least: 3.2
 Tested up to: 3.2.1
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 
 Ability to enter maintenance lockdown mode: force-logout all non-administrators, prevent logins from non-administrators, and disable commenting.
 
@@ -27,6 +27,9 @@ Nothing goes in the plugins directory.
 None yet!
 
 == Changelog ==
+
+= 0.9.4 =
+* Fixing potential bug, before a user is logged out making sure explicitly that PMC_LOCKDOWN is defined.
 
 = 0.9.3 =
 * Initial release
