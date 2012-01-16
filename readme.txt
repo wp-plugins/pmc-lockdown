@@ -16,6 +16,9 @@ Sometimes you don't need (or want) to shut down the entire frontend of the site 
 
 This plugin does not interact with, prevent, or override WordPress's maintenance mode.  It's complementary.
 
+Image by [Chris Randall](http://www.flickr.com/photos/chrisrandall/4608136274/); some rights reserved.  See link for details.
+
+
 == Installation ==
 
 Nothing goes in the plugins directory.
