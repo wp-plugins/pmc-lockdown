@@ -2,7 +2,7 @@
 Contributors: pmcdotcom, mintindeed, IAmWilliamWallace
 Tags: maintenance
 Requires at least: 3.2
-Tested up to: 3.2.1
+Tested up to: 3.3.1
 Stable tag: 0.9.5
 
 Ability to enter maintenance lockdown mode: force-logout all non-administrators, prevent logins from non-administrators, and disable commenting.
@@ -15,6 +15,10 @@ Sometimes you don't need (or want) to shut down the entire frontend of the site 
 * Comments will be closed (disabled) on all posts
 
 This plugin does not interact with, prevent, or override WordPress's maintenance mode.  It's complementary.
+
+Github: https://github.com/Penske-Media-Corp/pmc-lockdown
+
+WordPress.org plugin repository: http://wordpress.org/extend/plugins/pmc-lockdown/
 
 Image by [Chris Randall](http://www.flickr.com/photos/chrisrandall/4608136274/); some rights reserved.  See link for details.
 
