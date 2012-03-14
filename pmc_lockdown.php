@@ -3,7 +3,7 @@
 Plugin Name: PMC Lockdown
 Plugin URI: http://engineering.pmc.com/
 Description: Ability to enter lockdown mode: force-logout all non-administrators, prevent logins from non-administrators, and disable commenting.
-Version: 0.9.4
+Version: 0.9.5
 Author: PMC
 Author URI: http://engineering.pmc.com/
 */
@@ -69,7 +69,7 @@ add_action( 'admin_notices', 'pmc_lockdown_admin_notice' );
  * the athenticate filter so that we can return an error message during login.
  *
  * @since 0.9.0 2011-08-13 Gabriel Koen
- * @version 0.9.1 2011-08-16 Gabriel Koen
+ * @version 0.9.5 2012-02-04 Daniel Convissor
  */
 function pmc_lockdown_authentication( $user_data, $username ) {
 	// If we're not in lockdown mode, bail.
@@ -80,7 +80,7 @@ function pmc_lockdown_authentication( $user_data, $username ) {
 	// If the user is not an administrator, error out.
 	if ( !is_a($user_data, 'WP_Error') && 'administrator' !== pmc_lockdown_get_role($user_data, $username) ) {
 		$error = new WP_Error();
-		$error->add('pmc_maintenance', __('<strong>The site is undergoing maintenance.</strong>  Please try again later.', PMC_LOCKDOWN_I18N));
+		$error->add('pmc_maintenance', pmc_lockdown_maintenance_message());
 		return $error;
 	}
 
@@ -106,7 +106,7 @@ function pmc_lockdown_force_logout( $cookie_elements, $user ) {
 	// The auth_cookie_valid action is run more than once on an admin page render, the first time $current_user is null, then it's populated by a WP_User object.  So don't do anything unless $current_user is a WP_User object.
 	global $current_user;
 	if ( !is_null($current_user) && 'administrator' !== pmc_lockdown_get_role() ) {
-		wp_redirect('/wp-login.php?reauth');
+		wp_redirect(site_url('wp-login.php?reauth'));
 		exit();
 	}
 }
@@ -132,6 +132,31 @@ function pmc_lockdown_settings() {
 	}
 }
 add_action( 'admin_init', 'pmc_lockdown_settings' );
+
+
+/**
+ * Produces the maintenance message above the login form if necessary
+ *
+ * @since 0.9.5 2012-02-04 Daniel Convissor
+ * @version 0.9.5 2012-02-04 Daniel Convissor
+ */
+function pmc_lockdown_login_message() {
+	if ( defined('PMC_LOCKDOWN') ) {
+		return '<p class="login message">' . pmc_lockdown_maintenance_message() . '</p>';
+	}
+}
+add_filter( 'login_message', 'pmc_lockdown_login_message' );
+
+
+/**
+ * Gets the (translated) "site is undergoing maintenance" message
+ *
+ * @since 0.9.5 2012-02-04 Daniel Convissor
+ * @version 0.9.5 2012-02-04 Daniel Convissor
+ */
+function pmc_lockdown_maintenance_message() {
+	return __('<strong>The site is undergoing maintenance.</strong>  Please try again later.', PMC_LOCKDOWN_I18N);
+}
 
 
 /**

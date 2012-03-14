@@ -3,7 +3,7 @@ Contributors: pmcdotcom, mintindeed, IAmWilliamWallace
 Tags: maintenance
 Requires at least: 3.2
 Tested up to: 3.2.1
-Stable tag: 0.9.4
+Stable tag: 0.9.5
 
 Ability to enter maintenance lockdown mode: force-logout all non-administrators, prevent logins from non-administrators, and disable commenting.
 
@@ -25,11 +25,17 @@ Nothing goes in the plugins directory.
 
 1. Deploy `pmc_lockdown.php` to the `/wp-content/mu-plugins/` directory. Simply placing this file activates it. To deactivate it, move it from that location.
 
+2. The user interface for turning the "Maintenance Lockdown" mode on and off is in the Settings | Privacy section of your site's adminstration system.
+
 == Frequently Asked Questions ==
 
 None yet!
 
 == Changelog ==
+
+= 0.9.5 =
+* Updating installation instructions to note settings location.  Props convissor
+* Adding maintenance message to login screen.  Props convissor
 
 = 0.9.4 =
 * Fixing potential bug, before a user is logged out making sure explicitly that PMC_LOCKDOWN is defined.
