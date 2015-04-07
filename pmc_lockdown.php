@@ -30,7 +30,7 @@ function pmc_lockdown_init() {
 		define('PMC_LOCKDOWN', true);
 	}
 }
-add_action( 'muplugins_loaded','pmc_lockdown_init' );
+add_action( 'plugins_loaded','pmc_lockdown_init' );
 
 /**
  * Prevent comments while we're on lockdown
@@ -57,7 +57,7 @@ add_filter( 'comments_open', 'pmc_lockdown_close_comments', 99 );
 function pmc_lockdown_admin_notice() {
 	if ( defined('PMC_LOCKDOWN') ) {
 		?><div id="message" class="updated fade">
-			<p><?php printf( __('Site is on maintenance lockdown.  <a href="%s">Settings</a>', PMC_LOCKDOWN_I18N), admin_url('options-privacy.php') ); ?></p>
+			<p><?php printf( __('Site is on maintenance lockdown.  <a href="%s">Settings</a>', PMC_LOCKDOWN_I18N), admin_url('options-general.php') ); ?></p>
 		</div><?php
 	}
 }
@@ -114,7 +114,7 @@ add_action( 'auth_cookie_valid', 'pmc_lockdown_force_logout', 99, 2);
 
 
 /**
- * Add PMC Lockdown settings to the Privacy page
+ * Add PMC Lockdown settings to the General settings page
  *
  * @since 0.9.0 2011-08-13 Gabriel Koen
  * @version 0.9.1 2011-08-16 Gabriel Koen
@@ -126,9 +126,9 @@ function pmc_lockdown_settings() {
 		add_settings_field('pmc_lockdown',
 		__('Maintenance Lockdown', PMC_LOCKDOWN_I18N),
 		'pmc_lockdown_setting_field',
-		'privacy');
+		'general');
 
-		register_setting( 'privacy', 'pmc_lockdown' );
+		register_setting( 'general', 'pmc_lockdown' );
 	}
 }
 add_action( 'admin_init', 'pmc_lockdown_settings' );
